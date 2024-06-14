@@ -17,4 +17,7 @@ public class EmployeeService {
     }
 
 
+    public String saveEmployee(String requestData) {
+        return employeeRepo.saveEmployee(requestData);
+    }
 }
