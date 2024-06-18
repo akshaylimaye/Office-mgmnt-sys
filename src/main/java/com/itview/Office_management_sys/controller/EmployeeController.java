@@ -2,6 +2,7 @@ package com.itview.Office_management_sys.controller;
 
 import com.itview.Office_management_sys.model.Employee;
 import com.itview.Office_management_sys.service.EmployeeService;
+import com.itview.Office_management_sys.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +18,14 @@ public class EmployeeController {
     }
 
     @PostMapping("/employee")
-    public String saveEmployee(@RequestBody Employee requestData){
-        return employeeService.saveEmployee(requestData);
+    public String saveEmployee(@RequestBody Employee employeeData){
+
+        String phoneNumber = employeeData.getPhoneNumber();
+
+        if(!CommonUtils.isValidNumber(phoneNumber)) {
+            return "Phone number is not valid";
+        }
+        return employeeService.saveEmployee(employeeData);
 
     }
 
