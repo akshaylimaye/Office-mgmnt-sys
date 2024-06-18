@@ -2,6 +2,7 @@ package com.itview.Office_management_sys.service;
 
 
 import com.itview.Office_management_sys.dao.EmployeeRepo;
+import com.itview.Office_management_sys.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class EmployeeService {
     }
 
 
-    public String saveEmployee(String requestData) {
+    public String saveEmployee(Employee requestData) {
         return employeeRepo.saveEmployee(requestData);
     }
 }
