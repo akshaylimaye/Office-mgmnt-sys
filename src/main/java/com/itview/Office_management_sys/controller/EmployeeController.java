@@ -4,6 +4,7 @@ import com.itview.Office_management_sys.model.Employee;
 import com.itview.Office_management_sys.service.EmployeeService;
 import com.itview.Office_management_sys.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,9 +32,15 @@ public class EmployeeController {
 
 
     @GetMapping("/employee")
-    public String getEmployees() {
-        String listOfEmp = employeeService.getEmployee();
+    public String getEmployees(@Nullable @RequestParam String age, @Nullable String id) {
+        String listOfEmp = employeeService.getEmployee(age, id);
         return listOfEmp;
+    }
+
+    @DeleteMapping("/employee/{id}")
+    public String deleteEmployee(@PathVariable String id) {
+        employeeService.deleteEmployee(id);
+        return "Employee deleted with Id-" + id;
     }
 
 

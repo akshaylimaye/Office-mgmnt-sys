@@ -9,6 +9,8 @@ public class Employee {
 
     private String empName;
 
+    private String username;
+
     private String email;
 
     private int age;

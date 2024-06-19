@@ -10,12 +10,21 @@ public class EmployeeRepo {
 
     public static ArrayList<Employee> employeeList = new ArrayList<>();
 
-    public String getEmployee() {
-        return employeeList.toString();
+    public ArrayList<Employee> getEmployee() {
+        return employeeList;
     }
 
     public String saveEmployee(Employee employeeName) {
         employeeList.add(employeeName);
         return "Employee Added";
+    }
+
+    public void deleteEmployee(String id) {
+        for (Employee employee:employeeList) {
+            if (employee.getEmpId() == Integer.parseInt(id)) {
+                employeeList.remove(employee);
+                return;
+            }
+        }
     }
 }
