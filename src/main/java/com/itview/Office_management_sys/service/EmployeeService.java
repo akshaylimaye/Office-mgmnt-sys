@@ -25,15 +25,6 @@ public class EmployeeService {
             }
             return empAgeList.toString();
         }
-        if(null != id) {
-            for (Employee employee: employeeList) {
-                if(employee.getAge() > Integer.parseInt(age)) {
-                    empAgeList.add(employee);
-                }
-            }
-            return empAgeList.toString();
-        }
-
         return employeeList.toString();
 
     }
@@ -58,5 +49,9 @@ public class EmployeeService {
 
     public void deleteEmployee(String id) {
         employeeRepo.deleteEmployee(id);
+    }
+
+    public void updateEmployee(Employee employee, String id) {
+        employeeRepo.updateEmployee(employee, id);
     }
 }
