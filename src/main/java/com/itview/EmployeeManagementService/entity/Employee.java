@@ -28,5 +28,9 @@ public class Employee {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
+    @ManyToOne
+    @JoinColumn(name = "status")
+    private Status status;
+
 
 }
