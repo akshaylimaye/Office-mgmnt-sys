@@ -26,6 +26,7 @@ public class EmployeeController {
     @PostMapping("/employee")
     public ResponseEntity saveEmployee(@RequestBody Employee employeeData){
 
+        //Add validation to check if username exists
         Employee employee = employeeService.saveEmployee(employeeData);
         return new ResponseEntity(employee.getEmpId(), HttpStatus.CREATED);
 
@@ -38,24 +39,18 @@ public class EmployeeController {
      * @return
      */
     @GetMapping("/employee")
-    public ResponseEntity getEmployeesById(@Nullable @RequestParam String empId) {
+    public ResponseEntity getEmployeesById(@Nullable @RequestParam String empId, @RequestHeader String auth) {
         Employee emp = employeeService.getEmployeeById(Integer.valueOf(empId));
         return new ResponseEntity<>(emp.toString(), HttpStatus.OK);
     }
 
 
-    @GetMapping("/employeeByUsername")
-    public ResponseEntity getEmployees(@Nullable @RequestParam String username) {
-        Employee emp = employeeService.getEmployeeByUsername(username);
-        return new ResponseEntity<>(emp.toString(), HttpStatus.OK);
-    }
-
-    @GetMapping("/employeeByage")
-    public ResponseEntity getEmployeeByage(@Nullable @RequestParam String age) {
-        List<Employee> emp = employeeService.getEmployeeByage(Integer.valueOf(age));
-        return new ResponseEntity<>(emp.toString(), HttpStatus.OK);
-    }
-
+    /**
+     * Delete employee
+     *
+     * @param empId
+     * @return
+     */
     @DeleteMapping(value = "/employee/{empId}")
     public ResponseEntity deleteEmployee(@PathVariable int empId) {
         employeeService.deleteEmployee(empId);

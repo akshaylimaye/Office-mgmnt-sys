@@ -16,9 +16,6 @@ public class Employee {
     @Column(name = "empName")
     private String empName;
 
-    @Column(name = "username")
-    private String username;
-
     @Column(name = "email")
     private String email;
 
@@ -28,9 +25,14 @@ public class Employee {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
+
     @ManyToOne
     @JoinColumn(name = "status")
     private Status status;
-
 
 }

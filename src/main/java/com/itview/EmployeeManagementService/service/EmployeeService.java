@@ -4,9 +4,11 @@ import com.itview.EmployeeManagementService.entity.Employee;
 import com.itview.EmployeeManagementService.entity.Status;
 import com.itview.EmployeeManagementService.repository.EmployeeRepo;
 import com.itview.EmployeeManagementService.repository.StatusRepo;
+import com.itview.EmployeeManagementService.util.EncryptDecrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,10 +23,10 @@ public class EmployeeService {
 
     public Employee saveEmployee(Employee employeeData) {
 
+        String encodedPass = EncryptDecrypt.encrypt(employeeData.getUsername(),
+                employeeData.getPassword());
+        employeeData.setPassword(encodedPass);
         Status status = statusRepo.findById(1).get();
-
-
-
         employeeData.setStatus(status);
 
         return employeeRepo.save(employeeData);
@@ -55,8 +57,9 @@ public class EmployeeService {
 
     public void deleteEmployee(int empId) {
         Employee  employee = getEmployeeById(empId);
-        Status status = statusRepo.findById(0).get();
+        Status status = statusRepo.findById(2).get();
         employee.setStatus(status);
         employeeRepo.save(employee);
     }
+
 }
